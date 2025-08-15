@@ -14,16 +14,274 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      corrections: {
+        Row: {
+          arquivo_url: string | null
+          conteudo: string | null
+          data_criacao: string | null
+          id: string
+          personal_id: string
+          tipo: Database["public"]["Enums"]["correction_type"]
+          video_id: string
+        }
+        Insert: {
+          arquivo_url?: string | null
+          conteudo?: string | null
+          data_criacao?: string | null
+          id?: string
+          personal_id: string
+          tipo: Database["public"]["Enums"]["correction_type"]
+          video_id: string
+        }
+        Update: {
+          arquivo_url?: string | null
+          conteudo?: string | null
+          data_criacao?: string | null
+          id?: string
+          personal_id?: string
+          tipo?: Database["public"]["Enums"]["correction_type"]
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "corrections_personal_id_fkey"
+            columns: ["personal_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "corrections_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exercises: {
+        Row: {
+          created_at: string | null
+          descanso: string | null
+          id: string
+          nome: string
+          observacoes: string | null
+          ordem: number | null
+          repeticoes: string
+          series: number
+          training_id: string
+          updated_at: string | null
+          video_demonstracao_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          descanso?: string | null
+          id?: string
+          nome: string
+          observacoes?: string | null
+          ordem?: number | null
+          repeticoes: string
+          series: number
+          training_id: string
+          updated_at?: string | null
+          video_demonstracao_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          descanso?: string | null
+          id?: string
+          nome?: string
+          observacoes?: string | null
+          ordem?: number | null
+          repeticoes?: string
+          series?: number
+          training_id?: string
+          updated_at?: string | null
+          video_demonstracao_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exercises_training_id_fkey"
+            columns: ["training_id"]
+            isOneToOne: false
+            referencedRelation: "trainings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          nome: string
+          role: Database["public"]["Enums"]["user_role"]
+          telefone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id: string
+          nome: string
+          role?: Database["public"]["Enums"]["user_role"]
+          telefone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          nome?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          telefone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          anamnese: string | null
+          created_at: string | null
+          data_inicio: string
+          email: string
+          fotos_urls: string[] | null
+          id: string
+          nome: string
+          personal_id: string
+          telefone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          anamnese?: string | null
+          created_at?: string | null
+          data_inicio?: string
+          email: string
+          fotos_urls?: string[] | null
+          id?: string
+          nome: string
+          personal_id: string
+          telefone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          anamnese?: string | null
+          created_at?: string | null
+          data_inicio?: string
+          email?: string
+          fotos_urls?: string[] | null
+          id?: string
+          nome?: string
+          personal_id?: string
+          telefone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "students_personal_id_fkey"
+            columns: ["personal_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trainings: {
+        Row: {
+          ativo: boolean | null
+          created_at: string | null
+          data_inicial: string
+          id: string
+          nome: string
+          observacoes: string | null
+          student_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          created_at?: string | null
+          data_inicial?: string
+          id?: string
+          nome: string
+          observacoes?: string | null
+          student_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          created_at?: string | null
+          data_inicial?: string
+          id?: string
+          nome?: string
+          observacoes?: string | null
+          student_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trainings_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      videos: {
+        Row: {
+          aluno_id: string
+          data_envio: string | null
+          exercise_id: string
+          id: string
+          observacoes: string | null
+          video_url: string
+        }
+        Insert: {
+          aluno_id: string
+          data_envio?: string | null
+          exercise_id: string
+          id?: string
+          observacoes?: string | null
+          video_url: string
+        }
+        Update: {
+          aluno_id?: string
+          data_envio?: string | null
+          exercise_id?: string
+          id?: string
+          observacoes?: string | null
+          video_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "videos_aluno_id_fkey"
+            columns: ["aluno_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "videos_exercise_id_fkey"
+            columns: ["exercise_id"]
+            isOneToOne: false
+            referencedRelation: "exercises"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { user_id: string }
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      correction_type: "texto" | "foto" | "video"
+      user_role: "personal" | "aluno"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +408,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      correction_type: ["texto", "foto", "video"],
+      user_role: ["personal", "aluno"],
+    },
   },
 } as const
