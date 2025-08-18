@@ -12,9 +12,9 @@ const Index = () => {
     if (!loading && user && profile) {
       // Redirect based on user role
       if (profile.role === 'personal') {
-        navigate('/personal');
+        navigate('/personal/dashboard');
       } else if (profile.role === 'aluno') {
-        navigate('/student');
+        navigate('/student/dashboard');
       }
     }
   }, [user, profile, loading, navigate]);

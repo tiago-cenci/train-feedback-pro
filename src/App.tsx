@@ -1,8 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -14,6 +12,8 @@ import CorrectionsArea from "./pages/CorrectionsArea";
 import StudentTraining from "./pages/StudentTraining";
 import StudentCorrections from "./pages/StudentCorrections";
 import NotFound from "./pages/NotFound";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +23,7 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
@@ -37,7 +37,7 @@ const App = () => (
             <Route path="/student/corrections" element={<StudentCorrections />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
