@@ -174,6 +174,15 @@ export default function PersonalDashboard() {
           
           <Button 
             variant="outline" 
+            onClick={() => navigate('/personal/create-training')}
+            className="flex-1 sm:flex-none"
+          >
+            <Dumbbell className="h-4 w-4 mr-2" />
+            Criar Treino
+          </Button>
+          
+          <Button 
+            variant="outline" 
             onClick={() => navigate('/personal/corrections')}
             className="flex-1 sm:flex-none"
           >
@@ -250,10 +259,17 @@ export default function PersonalDashboard() {
                         </div>
                       </div>
                       
-                      <div className="mt-3 flex justify-between items-center">
+                       <div className="mt-3 flex justify-between items-center">
                         <Badge variant="secondary">Ativo</Badge>
-                        <Button size="sm" variant="ghost">
-                          Ver Perfil
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/personal/create-training/${student.id}`);
+                          }}
+                        >
+                          Criar Treino
                         </Button>
                       </div>
                     </CardContent>
