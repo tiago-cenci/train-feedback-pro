@@ -63,16 +63,7 @@ export default function StudentTraining() {
 
   const fetchStudentTraining = async () => {
     try {
-      // Get student record first
-      const { data: student, error: studentError } = await supabase
-        .from('students')
-        .select('id')
-        .eq('email', profile?.email)
-        .single();
-      
-      if (studentError) throw studentError;
-
-      // Get active training with exercises
+      // Get active training with exercises directly using email join
       const { data, error } = await supabase
         .from('trainings')
         .select(`
@@ -94,13 +85,17 @@ export default function StudentTraining() {
               data_envio,
               observacoes
             )
+          ),
+          students!inner (
+            id,
+            email
           )
         `)
-        .eq('student_id', student.id)
+        .eq('students.email', profile?.email)
         .eq('ativo', true)
         .order('created_at', { ascending: false })
         .limit(1)
-        .single();
+        .maybeSingle();
       
       if (error) {
         if (error.code === 'PGRST116') {
