@@ -10,6 +10,7 @@ import AddStudent from "./pages/AddStudent";
 import CreateTraining from "./pages/CreateTraining";
 import CorrectionsArea from "./pages/CorrectionsArea";
 import StudentTraining from "./pages/StudentTraining";
+import ActiveWorkout from "./pages/ActiveWorkout";
 import StudentCorrections from "./pages/StudentCorrections";
 import NotFound from "./pages/NotFound";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/personal/corrections" element={<CorrectionsArea />} />
             <Route path="/student/dashboard" element={<StudentDashboard />} />
             <Route path="/student/training" element={<StudentTraining />} />
+            <Route path="/student/active-workout" element={<ActiveWorkout />} />
             <Route path="/student/corrections" element={<StudentCorrections />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -269,6 +269,81 @@ export type Database = {
           },
         ]
       }
+      workout_sessions: {
+        Row: {
+          aluno_id: string
+          created_at: string
+          data_fim: string | null
+          data_inicio: string
+          duracao_minutos: number | null
+          finalizado: boolean
+          id: string
+          observacoes: string | null
+          training_id: string
+          updated_at: string
+        }
+        Insert: {
+          aluno_id: string
+          created_at?: string
+          data_fim?: string | null
+          data_inicio?: string
+          duracao_minutos?: number | null
+          finalizado?: boolean
+          id?: string
+          observacoes?: string | null
+          training_id: string
+          updated_at?: string
+        }
+        Update: {
+          aluno_id?: string
+          created_at?: string
+          data_fim?: string | null
+          data_inicio?: string
+          duracao_minutos?: number | null
+          finalizado?: boolean
+          id?: string
+          observacoes?: string | null
+          training_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      workout_sets: {
+        Row: {
+          carga: number | null
+          created_at: string
+          exercise_id: string
+          id: string
+          observacoes: string | null
+          repeticoes: number
+          serie_numero: number
+          updated_at: string
+          workout_session_id: string
+        }
+        Insert: {
+          carga?: number | null
+          created_at?: string
+          exercise_id: string
+          id?: string
+          observacoes?: string | null
+          repeticoes: number
+          serie_numero: number
+          updated_at?: string
+          workout_session_id: string
+        }
+        Update: {
+          carga?: number | null
+          created_at?: string
+          exercise_id?: string
+          id?: string
+          observacoes?: string | null
+          repeticoes?: number
+          serie_numero?: number
+          updated_at?: string
+          workout_session_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -277,6 +352,10 @@ export type Database = {
       get_user_role: {
         Args: { user_id: string }
         Returns: Database["public"]["Enums"]["user_role"]
+      }
+      publish_program: {
+        Args: { p_program_id: string }
+        Returns: undefined
       }
     }
     Enums: {

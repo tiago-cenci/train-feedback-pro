@@ -257,10 +257,23 @@ export default function StudentTraining() {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Voltar ao Dashboard
           </Button>
-          <h1 className="text-2xl font-bold">{training.nome}</h1>
-          {training.observacoes && (
-            <p className="text-muted-foreground mt-1">{training.observacoes}</p>
-          )}
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold">{training.nome}</h1>
+              {training.observacoes && (
+                <p className="text-muted-foreground mt-1">{training.observacoes}</p>
+              )}
+            </div>
+            <Button 
+              onClick={() => navigate(`/student/active-workout?trainingId=${training.id}`)}
+              variant="gradient"
+              size="lg"
+              className="ml-4"
+            >
+              <Play className="h-4 w-4 mr-2" />
+              Iniciar Treino
+            </Button>
+          </div>
         </div>
       </header>
 
